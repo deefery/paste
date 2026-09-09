@@ -2,6 +2,8 @@
   "$schema": "node_modules/wrangler/config-schema.json",
   "name": "paste",
   "main": "src/worker.js",
+  "kv_namespaces": [{ "binding": "PASTES", "id": "911e3c59ff144412bda789376adcdc34" }],
+  "routes": [{ "pattern": "paste.zhijic.com", "custom_domain": true }],
   "compatibility_date": "2026-09-01",
   "observability": {
     "enabled": true

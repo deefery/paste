@@ -9,7 +9,7 @@ const EXPIRATIONS = Object.freeze({
 });
 
 const SECURITY_HEADERS = Object.freeze({
-  "Content-Security-Policy": "default-src 'none'; style-src 'unsafe-inline'; script-src 'unsafe-inline'; base-uri 'none'; form-action 'self'; frame-ancestors 'none'",
+  "Content-Security-Policy": "default-src 'none'; connect-src 'self'; style-src 'unsafe-inline'; script-src 'unsafe-inline'; base-uri 'none'; form-action 'self'; frame-ancestors 'none'",
   "Referrer-Policy": "no-referrer",
   "X-Content-Type-Options": "nosniff",
   "X-Frame-Options": "DENY",
@@ -155,6 +155,7 @@ async function createPaste(request, env) {
     return json({ error: "JSON 格式无效" }, 400);
   }
 
+  if (!input || typeof input !== "object" || Array.isArray(input)) return json({ error: "JSON 必须是对象" }, 400);
   const content = typeof input.content === "string" ? input.content : "";
   if (!content.trim()) return json({ error: "文本不能为空" }, 400);
   const size = new TextEncoder().encode(content).byteLength;
